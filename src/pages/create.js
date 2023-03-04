@@ -35,9 +35,18 @@ export default function Create (){
         }
 
     }
-
+    //Para procesar imagen
     function handleOnChangeFile(e) {
+        const element = e.target;
+        const file = element.files[0];
+        const reader = new FileReader();
 
+        reader.readAsDataURL(file);
+
+        //el evento se va a ejecutar cuando podamos leer el archivo
+        reader.onloadend = function (){
+            setCover(reader.result.toString())
+        }
         
     }
 
@@ -77,7 +86,7 @@ export default function Create (){
 
                     <div>Cover</div>
                     <input type="file" name="cover" onChange={handleOnChangeFile} />
-                    <div></div>
+                    <div> {!!cover ? <img src={cover} width="200" alt="preview" /> : ''} </div>
                 </div>
 
                 <div>
