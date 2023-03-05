@@ -13,6 +13,18 @@ export default function View (){
     const params = useParams();
     const store = useAppContext();
 
+    //para aplicar estilos
+
+    const itemStyles ={
+        container:{
+            display: 'flex',
+            gap: '20px',
+            color: 'white',
+            width: '800px',
+            margin: '0 auto',
+        },
+    };
+
     //para que se ejecute al iniciar la pagina
     useEffect(() =>{
         const book = store.getItem(params.bookId); 
@@ -31,12 +43,20 @@ export default function View (){
 
     return (
         <LayOut>
-             <h2>{item?.title} </h2>     
+            <div style={itemStyles.container}>
+                  
+             <div>
                 <div>{item?.cover? <img src={item?.cover} width="400" /> : '' }</div>     
+
+            </div>
+            <div>
+                <h2>{item?.title} </h2>
                 <div>{item?.author} </div>
                 <div>{item?.intro} </div>
                 <div>{item?.completed ? 'Leido' : 'Por terminar'} </div>
                 <div>{item?.review} </div>
+            </div>
+            </div>
         </LayOut>
     )
 }
