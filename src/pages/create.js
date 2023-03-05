@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAppContext } from "../store/store";
 
 import LayOut from "../components/layout";
+import { useNavigate } from "react-router-dom";
 
 export default function Create (){
 
@@ -13,6 +14,7 @@ export default function Create (){
     const [review,setReview]= useState('');
 
     const store= useAppContext();
+    const navigate =useNavigate();
 
     //con un solo handlechange manejo el estado de todos los inputs
     function handleChange(e){
@@ -76,6 +78,7 @@ export default function Create (){
 
              store.createItem(newBook);
 
+             navigate("/");
     }
 
     return (
