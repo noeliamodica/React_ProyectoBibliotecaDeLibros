@@ -15,11 +15,51 @@ export default function Store({children}){
 
     const [items, setItems]= useState([]);
 
+    function createItem(item){
+        //inserto el elemento dentro del listado de items
+        const temp = [...items];
+        //lo incluyo al final
+        temp.push(item);
+
+        //actualizo el estado
+        setItems(temp);
+
+    }
+
+    function getItem(id){
+        const item = items.find(item => item.id ===id);
+
+        return item
+    }
+
+    function updateItem(item){
+
+        //para regresar el index dentro del arreglo
+        const index = items.find(i => i.id ===item.id);
+
+        //para sacar la copia
+        const temp = [...items];
+        //para actualizar el elemento en esa posicion con la nueva info
+        temp[index] = {... item};
+    }
 
 
     return(
-        <AppContext.Provider>
+
+        //hacemos accecible a cualquier componente de nuestra aplicacion
+        <AppContext.Provider 
+            value ={ {
+                items,
+                createItem,
+                getItem,
+                updateItem,
+                }}>
+
             {children}
         </AppContext.Provider>
     )
+}
+
+export function useAppContext (){
+        return useContext(AppContext);
 }

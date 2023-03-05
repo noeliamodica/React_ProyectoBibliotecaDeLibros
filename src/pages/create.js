@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useAppContext } from "../store/store";
+
+import LayOut from "../components/layout";
 
 export default function Create (){
 
@@ -9,6 +12,8 @@ export default function Create (){
     const [completed,setCompleted]= useState('false');
     const [review,setReview]= useState('');
 
+    const store= useAppContext();
+
     //con un solo handlechange manejo el estado de todos los inputs
     function handleChange(e){
         const name= e.target.name;
@@ -18,6 +23,10 @@ export default function Create (){
             case 'title':
                 setTitle(value);
                 break;
+
+            case 'author':
+                setAuthor(value);
+                break;    
             
             case 'intro':
                 setIntro(value);
@@ -63,11 +72,16 @@ export default function Create (){
             review
         };
 
-        //TODO: mandar a registrar libro
+        //mandar a registrar libro
+
+             store.createItem(newBook);
+
     }
 
     return (
-        <div>
+        <LayOut>
+
+    
             <form onSubmit={handleSubmit}>
                 <div>
 
@@ -110,6 +124,6 @@ export default function Create (){
 
                 <input type="submit" value="Register book"></input>
             </form>
-        </div>
+        </LayOut>
     )
 }

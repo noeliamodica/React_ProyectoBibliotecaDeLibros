@@ -1,7 +1,16 @@
+
+import LayOut from "../components/layout";
+import { useAppContext } from "../store/store"
+
+
 export default function Index (){
+
+    const store = useAppContext();
+
     return (
-        <div>
-            Index
-        </div>
+        <LayOut>
+            
+            {store.items.map(item => <div> {item.title} </div> ) }
+        </LayOut>
     )
 }
