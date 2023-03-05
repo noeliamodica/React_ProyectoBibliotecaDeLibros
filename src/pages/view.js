@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams} from "react-router-dom"
 import LayOut from "../components/layout"
 import { useAppContext } from "../store/store";
-import { useState } from "react";
+
 
 export default function View (){
     
@@ -25,16 +25,18 @@ export default function View (){
     //genero un condicional
 
     if (!item){
-        return <div> Item not found </div>
+        return <LayOut> Item not found </LayOut>
     }
 
-    
-
-    
 
     return (
         <LayOut>
-            
+             <h2>{item?.title} </h2>     
+                <div>{item?.cover? <img src={item?.cover} width="400" /> : '' }</div>     
+                <div>{item?.author} </div>
+                <div>{item?.intro} </div>
+                <div>{item?.completed ? 'Leido' : 'Por terminar'} </div>
+                <div>{item?.review} </div>
         </LayOut>
     )
 }
